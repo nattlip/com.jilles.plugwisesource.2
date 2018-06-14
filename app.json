@@ -1,0 +1,20 @@
+{
+  "id": "com.jilles.plugwisesource.2",
+  "version": "2.0.0",
+  "compatibility": ">=1.5.0",
+  "sdk": 2,
+  "name": {
+    "en": "Plugwise Source"
+  },
+  "description": {
+    "en": "Imports Plugwise data from Source and controls Circels"
+  },
+  "category": [
+    "appliances"
+  ],
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.png",
+    "small": "/assets/images/small.png"
+  }
+}
