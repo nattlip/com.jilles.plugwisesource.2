@@ -16,5 +16,12 @@
   "images": {
     "large": "/assets/images/large.png",
     "small": "/assets/images/small.png"
-  }
+  },
+
+  "bugs": {
+    "url": "https://github.com/nattlip/com.jilles.plugwisesource.2/issues"
+  },
+
+  "athomForumDiscussionId": 1383
+
 }
