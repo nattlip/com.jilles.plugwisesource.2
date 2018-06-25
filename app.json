@@ -7,7 +7,21 @@
     "en": "Plugwise Source"
   },
   "description": {
-    "en": "Imports Plugwise data from Source and controls Circels"
+    "en": "Imports Plugwise data from Source and controls Circels",
+    "nl": "Importeerd Plugwise data van Source en bediend Circles"
+  },
+  "author": {
+    "name": "Jilles Miedema"
+  },
+  "contributors": {
+    "developers": [
+
+      {
+        "name": "Bas van den Bosch",
+        "email": "info@sasteren.nl",
+        "website": "https://github.com/bvdbos/"
+      }
+    ]
   },
   "category": [
     "appliances"
