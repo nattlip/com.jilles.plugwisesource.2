@@ -5,7 +5,7 @@ const util = require('util');
 
 
 
-class circleDevice extends Homey.Device {
+class lightDevice extends Homey.Device {
 
 
     // this method is called when the Device is inited
@@ -100,10 +100,10 @@ class circleDevice extends Homey.Device {
 
 
 
-        if (this.driver == 'circle') {
+        if (this.driver == 'light') {
 
             this.log(`this is device with driver id  ${this.getDriver().id}`)
-            this.log('info from circle device HD  ', HD)
+            this.log('info from light device HD  ', HD)
 
 
             this.setCapabilityValue(`onoff`, HD.onoff)
@@ -156,4 +156,4 @@ class circleDevice extends Homey.Device {
 
 }
 
-module.exports = circleDevice
+module.exports = lightDevice

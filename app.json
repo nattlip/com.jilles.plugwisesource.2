@@ -1,5 +1,5 @@
 {
-  "id": "com.jilles.plugwisesource.2",
+  "id": "com.jilles.plugwisesource",
   "version": "2.0.0",
   "compatibility": ">=1.5.0",
   "sdk": 2,
@@ -7,8 +7,8 @@
     "en": "Plugwise Source"
   },
   "description": {
-    "en": "Imports Plugwise data from Source and controls Circels",
-    "nl": "Importeerd Plugwise data van Source en bediend Circles"
+    "en": "Imports Plugwise data from Source and controls Circels als switch or as light",
+    "nl": "Importeerd Plugwise data van Source en bediend Circels als schakelaar of licht"
   },
   "author": {
     "name": "Jilles Miedema"
@@ -146,19 +146,141 @@
           },
           "children": [
             {
-              "id": "checkbox1",
+              "id": "locked",
               "type": "checkbox",
-              "value": true,
+              "value": false,
               "label": {
                 "en": "locked"
               },
               "hint": {
-                "en": "if circle can be controlled"
+                "en": "if circle can be controlled by user "
               }
-            }            
-              ]
             }
           ]
         }
       ]
+    },
+    {
+      "id": "light",
+      "name": {
+        "en": "light",
+        "nl": "light"
+      },
+      "class": "socket",
+      "capabilities": [ "onoff", "measure_power", "meter_power" ],
+      "images": {
+        "large": "drivers/light/assets/images/large.jpg",
+        "small": "drivers/light/assets/images/small.jpg"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          },
+          "options": {
+            "singular": false
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Device Information"
+          },
+          "children": [
+            {
+              "id": "id",
+              "type": "label",
+              "label": {
+                "en": "device id"
+              },
+              "value": "",
+              "hint": {
+                "en": "device id "
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Update Information "
+          },
+          "children": [
+            {
+              "id": "absoluteDateTime",
+              "type": "label",
+              "label": {
+                "en": "datetime of last received message"
+              },
+              "value": "",
+              "hint": {
+                "en": "used to calculate deltaDatetime"
+              }
+            },
+            {
+              "id": "lastUpdateSensor",
+              "type": "label",
+              "label": {
+                "en": "datetime of last received message"
+              },
+              "value": "",
+              "hint": {
+                "en": "absolute last date and time of received sensor values"
+              }
+            },
+            {
+              "id": "deltaDateTime",
+              "type": "label",
+              "label": {
+                "en": "deltaDateTime"
+              },
+              "value": "deltaDateTime",
+              "hint": {
+                "en": "time between last received sensor message and now"
+              }
+            },
+            {
+              "id": "lastCheckDateTime",
+              "type": "label",
+              "label": {
+                "en": "datetime last check "
+              },
+              "value": "",
+              "hint": {
+                "en": "time last checked update sensor  "
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Specific settings"
+          },
+          "children": [
+            {
+              "id": "locked",
+              "type": "checkbox",
+              "value": false,
+              "label": {
+                "en": "locked"
+              },
+              "hint": {
+                "en": "if light can be controlled by user "
+              }
+            }
+          ]
+        }
+      ]
+    }
+
+  ]
     }
