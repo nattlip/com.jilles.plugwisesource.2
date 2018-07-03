@@ -33,7 +33,7 @@ Changelog
 
 01-07-2018  v 2.0.0      SDK 2 version   setting locked included to lock circle, and circle can be added as Homey light
 
-01-07-2018  v 2.0.0      SDK 2 version   node modules were excluded in gitignore, light virtual class didnt work  , now it works
+03-07-2018  v 2.0.1      SDK 2 version   node modules were excluded in gitignore, light virtual class didnt work  , now it works
 
 [![Paypal donate][pp-donate-image]][pp-donate-link]
 [pp-donate-link]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=42UGL52J4KPZE
