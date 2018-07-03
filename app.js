@@ -146,23 +146,20 @@ class MyApp extends Homey.App {
                         this.log('app 277   response.statusCode        ', response.statusCode);
                         this.log('app 277    this.testplugwiseserver    ', this.plugwiseservertested);
                     }; //connected
-                }
-
-
-                //else {
-
-                //  this.log('app 201 callback2 response.statusCode', response.statusCode)
-
-                //  self.serverdata = str;   // to send to driver
-
-                let checkpath = '';  //    /api/actions.html?
-
-                checkpath = path.slice(0, 5);
-                this.log('let path ', path)
-                this.log('/api/  checkpath = ', checkpath)
 
 
 
+                    //else {
+
+                    //  this.log('app 201 callback2 response.statusCode', response.statusCode)
+
+                    //  self.serverdata = str;   // to send to driver
+
+                    let checkpath = '';  //    /api/actions.html?
+
+                    checkpath = path.slice(0, 5);
+                    this.log('let path ', path)
+                    this.log('/api/  checkpath = ', checkpath)
 
 
 
@@ -171,17 +168,20 @@ class MyApp extends Homey.App {
 
 
 
-                if (!(checkpath == '/api/')) {
 
 
 
-                    this.log('!(checkpath == /api/)', !(checkpath == '/api/'))
-
-                    this.resolveGet(str, this.polleri);
-
-                };
+                    if (!(checkpath == '/api/')) {
 
 
+
+                        this.log('!(checkpath == /api/)', !(checkpath == '/api/'))
+
+                        this.resolveGet(str, this.polleri);
+
+                    };
+
+                } //if response == 200
             }); // on end
 
 
@@ -348,6 +348,7 @@ class MyApp extends Homey.App {
 
         for (let i = 0; i < len; i++) {
             let homeyDevice = {};
+            
             //  util.log(util.inspect((dat[i].moduletype == "Circle" || dat[i].moduletype == "Circle+"), false, null))
             //  util.log(util.inspect((dat[i]), false, null))
             // filter out all other devices as circles and circles+
@@ -356,7 +357,8 @@ class MyApp extends Homey.App {
                     data: {
                         id: dat[i].macaddr,
                         plugwiseid: dat[i].id, // id in plugwise needed  to send command
-                        sourseid: dat[i].macaddr.slice(-6)              // id in source
+                        sourseid: dat[i].macaddr.slice(-6),              // id in source
+                        light:false
                     },
                     name: dat[i].name,
                     capabilities: ["onoff", "measure_power", "meter_power"],
@@ -367,6 +369,8 @@ class MyApp extends Homey.App {
                     onoff: this.translatePowerstateFromPlugwiseToHomey(dat[i].realstate),
                     settings: { id: dat[i].macaddr.slice(-6), locked: this.translateLocked(dat[i].locked) }
                 };
+
+             
 
                 this.log('device      ', homeyDevice);
 
@@ -391,7 +395,7 @@ class MyApp extends Homey.App {
 
     }
 
-    transports(filledDevice) {
+    transports(filledDevice ) {
 
 
          // circle
@@ -412,13 +416,15 @@ class MyApp extends Homey.App {
             }
         }
 
-        filledDevice.virtualClass = 'light'
+        
+        
 
         if (!this.contains(driverLight.homeyDevices, filledDevice)) {
-            
+          
             driverLight.homeyDevices.push(filledDevice);
             this.log(` device pushed to homeyDevices  ${filledDevice.data.id}`)
         } else {
+         
             this.log(` device found in homey devices ${filledDevice.data.id}`)
             let device = driverLight.getDevice(filledDevice.data);
             this.log(`device instanceof Homey.Device              ${device instanceof Homey.Device}`)
@@ -438,7 +444,7 @@ class MyApp extends Homey.App {
 
     contains(a, obj) {
         for (var i = 0; i < a.length; i++) {
-            if (a[i].data.id == obj.data.id) {
+            if (a[i].data.id == obj.data.id ) {
                 return true;
             }
         }
