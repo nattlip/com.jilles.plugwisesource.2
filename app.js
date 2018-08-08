@@ -118,7 +118,7 @@ class MyApp extends Homey.App {
 
             this.log('driver 174  callback2 entered ')
 
-            response.on('data', function (chunk) {
+            response.on('data',  (chunk) => {
                 str += chunk;
                 ;
             });
@@ -212,7 +212,7 @@ class MyApp extends Homey.App {
         this.log(' before req to be executed options2  ', options2);
         let req = http.request(options2, callback2);
         req.end();
-        req.on('error', function (err) {
+        req.on('error',  (err) => {
             this.log('err req', err)
         });
 
