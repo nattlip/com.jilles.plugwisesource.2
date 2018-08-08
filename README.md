@@ -35,6 +35,8 @@ Changelog
 
 03-07-2018  v 2.0.1      SDK 2 version   node modules were excluded in gitignore, light virtual class didnt work  , now it works
 
+08-08-2018  v 2.0.2      fixed a bug
+
 [![Paypal donate][pp-donate-image]][pp-donate-link]
 [pp-donate-link]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=42UGL52J4KPZE
 [pp-donate-image]: https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif
