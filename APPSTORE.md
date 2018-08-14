@@ -4,7 +4,7 @@
 
 omey app to integrate Plugwise Windows desktop Source in Homey.
 
-Works with data retreived from Plugwise Source Server . Controls Circles with Homey.
+Works with data retreived from Plugwise Source Server . Controls Circles and Stealths with Homey.
 
 30-08-2016 version 0.1.2 first app store release changes : only Circles and Circles+ can be added as Homey socket devices.
  
@@ -36,6 +36,8 @@ Changelog
 03-07-2018  v 2.0.1      SDK 2 version   node modules were excluded in gitignore, light virtual class didnt work  , now it works
 
 08-08-2018  v 2.0.2      fixed a bug
+
+14-08-2018  v 2.0.3      added stealth as a circel device 
 
 [![Paypal donate][pp-donate-image]][pp-donate-link]
 [pp-donate-link]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=42UGL52J4KPZE
