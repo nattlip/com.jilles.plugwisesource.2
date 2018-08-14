@@ -209,6 +209,7 @@ class MyApp extends Homey.App {
 
 
 
+
         this.log(' before req to be executed options2  ', options2);
         let req = http.request(options2, callback2);
         req.end();
@@ -352,7 +353,7 @@ class MyApp extends Homey.App {
             //  util.log(util.inspect((dat[i].moduletype == "Circle" || dat[i].moduletype == "Circle+"), false, null))
             //  util.log(util.inspect((dat[i]), false, null))
             // filter out all other devices as circles and circles+
-            if (dat[i].moduletype == "Circle" || dat[i].moduletype == "Circle+") {
+            if (dat[i].moduletype == "Circle" || dat[i].moduletype == "Circle+" || dat[i].moduletype == "Stealth" ) {
                 homeyDevice = {
                     data: {
                         id: dat[i].macaddr,
