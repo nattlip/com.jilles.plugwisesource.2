@@ -1,6 +1,6 @@
 {
   "id": "com.jilles.plugwisesource",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "compatibility": ">=1.5.0",
   "sdk": 2,
   "name": {
@@ -37,6 +37,8 @@
   },
 
   "athomForumDiscussionId": 1383,
+
+  "homeyCommunityTopicId": 125,
 
   "drivers": [
     {
@@ -283,4 +285,4 @@
     }
 
   ]
-    }
+}
