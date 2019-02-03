@@ -3,6 +3,9 @@
   "version": "2.0.4",
   "compatibility": ">=1.5.0",
   "sdk": 2,
+  "permissions": [
+    "homey:manager:api"
+  ],
   "name": {
     "en": "Plugwise Source"
   },
@@ -26,8 +29,7 @@
   "category": [
     "appliances"
   ],
-  "permissions": [],
-  "images": {
+    "images": {
     "large": "/assets/images/large.jpg",
     "small": "/assets/images/small.jpg"
   },

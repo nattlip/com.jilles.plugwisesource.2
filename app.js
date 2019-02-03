@@ -5,11 +5,62 @@ const http = require('http');
 const util = require('util');
 const xml2js = require('xml2js');
 const Homey = require('homey');
-const driverCircle = Homey.ManagerDrivers.getDriver('circle')
-const driverLight = Homey.ManagerDrivers.getDriver('light')
+
+//const HomeyAPI = require('athom-api');
+const Fdevice = require('./lib/filledDevice.js');
+const driverCircle = Homey.ManagerDrivers.getDriver('circle');
+const driverLight = Homey.ManagerDrivers.getDriver('light');
+
+
+
+
 class MyApp extends Homey.App {
 
+
+    //getApi() {
+    //    if (!this.api) {
+    //        this.api = HomeyAPI.forCurrentHomey();
+    //    }
+    //    return this.api;
+    //}
+
+
+    //async getDevices() {
+    //    this.log(` async getDevices   ${util.inspect(await this.api.devices.getDevices())}`); 
+    //    return await this.api.devices.getDevices();
+    //}
+
+
+    
+
+
+
     onInit() {
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       // this.log(` driver circle   ${util.inspect(Homey.ManagerDrivers.getDriver('circle'))}`); 
+
+
+
+
+
         this.log('MyApp is running...');
 
         this.serverip = Homey.ManagerSettings.get('serverip');
@@ -17,10 +68,10 @@ class MyApp extends Homey.App {
         this.serverusername = Homey.ManagerSettings.get('serverusername');
         this.serverpassword = Homey.ManagerSettings.get('serverpassword');
 
-        this.plugwiseserverset = true
-        this.plugwiseservertested = false
-        this.plugwiseserverconnected = false
-        this.polleri = 0
+        this.plugwiseserverset = true;
+        this.plugwiseservertested = false;
+        this.plugwiseserverconnected = false;
+        this.polleri = 0;
         this.pollInterval = 15000,
             this.serverpath = '/statistics.xml';
         this.servermethod = 'GET';
@@ -38,33 +89,33 @@ class MyApp extends Homey.App {
 
         Homey.ManagerSettings.on('set', (key) => {
             let value = Homey.ManagerSettings.get(key);
-            if (key == 'serverip') {
-                this.serverip = value
+            if (key === 'serverip') {
+                this.serverip = value;
             }
-            if (key == 'serverport') {
-                this.serverport = value
+            if (key === 'serverport') {
+                this.serverport = value;
             }
-            if (key == 'serverusername') {
-                this.serverusername = value
+            if (key === 'serverusername') {
+                this.serverusername = value;
             }
-            if (key == 'serverpassword') {
-                this.serverpassword = value
+            if (key === 'serverpassword') {
+                this.serverpassword = value;
             }
 
 
-            this.log('Setting', key, 'is set ', value)
+            this.log('Setting', key, 'is set ', value);
 
             clearInterval(this.toset);
-            this.polleri += 1
+            this.polleri += 1;
 
-            this.reqserver(this.serverip, this.serverport, this.serverpath, this.servermethod, this.serverusername, this.serverpassword)
+            this.reqserver(this.serverip, this.serverport, this.serverpath, this.servermethod, this.serverusername, this.serverpassword);
 
 
             this.pollplugwise();
 
 
 
-        })
+        });
 
 
         this.pollplugwise();
@@ -95,14 +146,14 @@ class MyApp extends Homey.App {
 
                 this.reqserver(this.serverip, this.serverport, this.serverpath, this.servermethod, this.serverusername, this.serverpassword);
 
-            };
+            }
             this.log('app 27 polleri after ', this.polleri);
 
 
         };
 
 
-        this.toset = setInterval(() => { this.torepeat() }, this.pollInterval);
+        setTimeout( () => { this.toset = setInterval(() => { this.torepeat(); }, this.pollInterval); } ,10000);
 
     }
 
@@ -116,11 +167,11 @@ class MyApp extends Homey.App {
 
             //another chunk of data has been recieved, so append it to `str`
 
-            this.log('driver 174  callback2 entered ')
+            this.log('driver 174  callback2 entered ');
 
             response.on('data',  (chunk) => {
                 str += chunk;
-                ;
+               
             });
 
             //the whole response has been recieved, so we just print it out here
@@ -129,7 +180,7 @@ class MyApp extends Homey.App {
 
                 this.log('app 50         response on end');
 
-                if (response.statusCode == 200) {
+                if (response.statusCode === 200) {
                     this.log('app 240   after    if (response.statusCode == 200)      ', response.statusCode);
                     this.plugwiseservertested = true;
                     // only do a meesage if value chaneged
@@ -138,14 +189,14 @@ class MyApp extends Homey.App {
                         this.log('app 269  server isconnected      ');
 
                         this.plugwiseserverconnected = true;
-                        this.plugwiseservertesting = false // not more we are connected to  the server
+                        this.plugwiseservertesting = false; // not more we are connected to  the server
 
                         // Homey.manager('api').realtime('my_event', { plugwiseserverconnected: true });
 
 
                         this.log('app 277   response.statusCode        ', response.statusCode);
                         this.log('app 277    this.testplugwiseserver    ', this.plugwiseservertested);
-                    }; //connected
+                    } //connected
 
 
 
@@ -158,8 +209,8 @@ class MyApp extends Homey.App {
                     let checkpath = '';  //    /api/actions.html?
 
                     checkpath = path.slice(0, 5);
-                    this.log('let path ', path)
-                    this.log('/api/  checkpath = ', checkpath)
+                    this.log('let path ', path);
+                    this.log('/api/  checkpath = ', checkpath);
 
 
 
@@ -171,15 +222,15 @@ class MyApp extends Homey.App {
 
 
 
-                    if (!(checkpath == '/api/')) {
+                    if (!(checkpath === '/api/')) {
 
 
 
-                        this.log('!(checkpath == /api/)', !(checkpath == '/api/'))
+                        this.log('!(checkpath == /api/)', !(checkpath === '/api/'));
 
                         this.resolveGet(str, this.polleri);
 
-                    };
+                    }
 
                 } //if response == 200
             }); // on end
@@ -214,7 +265,7 @@ class MyApp extends Homey.App {
         let req = http.request(options2, callback2);
         req.end();
         req.on('error',  (err) => {
-            this.log('err req', err)
+            this.log('err req', err);
         });
 
     }// end request
@@ -235,7 +286,7 @@ class MyApp extends Homey.App {
 
         // this.log(data);
 
-        let parser = new xml2js.Parser({ explicitArray: false })
+        let parser = new xml2js.Parser({ explicitArray: false });
 
         parser.parseString(data, (err, result) => {
 
@@ -250,10 +301,10 @@ class MyApp extends Homey.App {
 
             let sourceobject = result;
 
-            //  this.log('result get', result)
+          //  this.log('result get', result);
 
             let appliances = sourceobject.items.appliance;
-            this.log('APPLIANCES GET get', sourceobject.items.appliance)
+           // this.log('APPLIANCES GET get', sourceobject.items.appliance);
 
             this.TranslateAppliancesToAppDevices(sourceobject.items.appliance);
 
@@ -321,7 +372,7 @@ class MyApp extends Homey.App {
 
     resolvePost(result) {
 
-        this.log('result post ', result)
+       // this.log('result post ', result);
 
 
 
@@ -329,10 +380,10 @@ class MyApp extends Homey.App {
 
     translateLocked(s) {
 
-        if (s == `False`)
-            return false
-        if (s == `True`)
-            return true
+        if (s === `False`)
+            return false;
+        if (s === `True`)
+            return true;
     }
 
 
@@ -343,7 +394,7 @@ class MyApp extends Homey.App {
 
 
 
-        let len = dat.length
+        let len = dat.length;
         let homeyDevices = [];
         this.log('entered tranlateapplicance to homeyDevice');
 
@@ -353,7 +404,7 @@ class MyApp extends Homey.App {
             //  util.log(util.inspect((dat[i].moduletype == "Circle" || dat[i].moduletype == "Circle+"), false, null))
             //  util.log(util.inspect((dat[i]), false, null))
             // filter out all other devices as circles and circles+
-            if (dat[i].moduletype == "Circle" || dat[i].moduletype == "Circle+" || dat[i].moduletype == "Stealth" ) {
+            if (dat[i].moduletype === "Circle" || dat[i].moduletype === "Circle+" || dat[i].moduletype === "Stealth" ) {
                 homeyDevice = {
                     data: {
                         id: dat[i].macaddr,
@@ -363,8 +414,10 @@ class MyApp extends Homey.App {
                     },
                     name: dat[i].name,
                     capabilities: ["onoff", "measure_power", "meter_power"],
-                    measure_power: Number(((dat[i].powerusage) / 100).toFixed(2)),
-                    meter_power: Number(((dat[i].totalusage) / 100).toFixed(0)),
+                    realstate: dat[i].realstate,                                    // unknown if not connected
+                    powerstate: dat[i].powerstate,                                  // unknown if not connected
+                    measure_power: Number((dat[i].powerusage/ 100).toFixed(2)),
+                    meter_power: Number((dat[i].totalusage / 100).toFixed(0)),
                     type: dat[i].type,
                     room: dat[i].room,
                     onoff: this.translatePowerstateFromPlugwiseToHomey(dat[i].realstate),
@@ -373,12 +426,11 @@ class MyApp extends Homey.App {
 
              
 
-                this.log('device      ', homeyDevice);
+              //  this.log('device      ', homeyDevice);
 
-
-                this.transports(homeyDevice)
-            };
-        };
+                if (this.polleri > 1) { this.transports(homeyDevice); }
+            }
+        }
 
 
 
@@ -387,11 +439,11 @@ class MyApp extends Homey.App {
 
 
     translatePowerstateFromPlugwiseToHomey(state) {
-        if (state == "on") {
-            return true
+        if (state === "on") {
+            return true;
         }
-        else if (state == "off") {
-            return false
+        else if (state === "off") {
+            return false;
         }
 
     }
@@ -399,19 +451,21 @@ class MyApp extends Homey.App {
     transports(filledDevice ) {
 
 
+
+
          // circle
         if (!this.contains(driverCircle.homeyDevices, filledDevice)) {
             driverCircle.homeyDevices.push(filledDevice);
-            this.log(` device pushed to homeyDevices  ${filledDevice.data.id}`)
+            this.log(` device pushed to homeyDevices  ${filledDevice.data.id}`);
         } else {
-            this.log(` device found in homey devices ${filledDevice.data.id}`)
+            this.log(` device found in homey devices ${filledDevice.data.id}`);
             let device = driverCircle.getDevice(filledDevice.data);
-            this.log(`device instanceof Homey.Device              ${device instanceof Homey.Device}`)
+            this.log(`device instanceof Homey.Device              ${device instanceof Homey.Device}`);
             if (device instanceof Homey.Device) {
-                Homey.app.log('orgeon decoding device is already registered')
+                Homey.app.log('plugewise device is already registered');
                 driverCircle.log('device is already registered');
-                device.log(`device is already registered with  getData() ${util.inspect(device.getData())}  `)
-                device.updateCapabilitiesCircle(filledDevice)
+                device.log(`device is already registered with  getData() ${util.inspect(device.getData())}  `);
+                device.updateCapabilitiesCircle(filledDevice);
                 // client.end();
                 // return callback(Error('duplicate'));
             }
@@ -423,17 +477,17 @@ class MyApp extends Homey.App {
         if (!this.contains(driverLight.homeyDevices, filledDevice)) {
           
             driverLight.homeyDevices.push(filledDevice);
-            this.log(` device pushed to homeyDevices  ${filledDevice.data.id}`)
+            this.log(` device pushed to homeyDevices  ${filledDevice.data.id}`);
         } else {
          
-            this.log(` device found in homey devices ${filledDevice.data.id}`)
+            this.log(` device found in homey devices ${filledDevice.data.id}`);
             let device = driverLight.getDevice(filledDevice.data);
-            this.log(`device instanceof Homey.Device              ${device instanceof Homey.Device}`)
+            this.log(`device instanceof Homey.Device              ${device instanceof Homey.Device}`);
             if (device instanceof Homey.Device) {
-                Homey.app.log('orgeon decoding device is already registered')
+                Homey.app.log('orgeon decoding device is already registered');
                 driverLight.log('device is already registered');
-                device.log(`device is already registered with  getData() ${util.inspect(device.getData())}  `)
-                device.updateCapabilitiesCircle(filledDevice)
+                device.log(`device is already registered with  getData() ${util.inspect(device.getData())}  `);
+                device.updateCapabilitiesCircle(filledDevice);
                 // client.end();
                 // return callback(Error('duplicate'));
             }
@@ -445,12 +499,12 @@ class MyApp extends Homey.App {
 
     contains(a, obj) {
         for (var i = 0; i < a.length; i++) {
-            if (a[i].data.id == obj.data.id ) {
+            if (a[i].data.id === obj.data.id ) {
                 return true;
             }
         }
         return false;
-    };
+    }
 
 
 

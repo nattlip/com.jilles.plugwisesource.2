@@ -11,43 +11,53 @@ class circleDevice extends Homey.Device {
     // this method is called when the Device is inited
     //#region onInit
 
+
+   
+
+    
+
+
     onInit() {
 
 
-        this.name =   this.getName()
+       
+
+
+
+        this.name = this.getName()
         this.log(`device init ${this.name}`);
         this.log('device name:', this.name);
         this.class = this.getClass();
         this.log('homey class name:', this.class);
         this.driver = this.getDriver().id
-        this.log(`driver name id `, this.driver)       
-        this.log(`node driver classname in file `, this.getDriver().constructor.name)
+        this.log(`driver name id `, this.driver)
+        this.log(`node driver classname in file `, this.getDriver().constructor.name);
         // this.log(`driver `, this.inspect(this.getDriver()))
-             
 
-        this.data = this.getData()
-        this.log(`device data     ${this.data} `)
+
+        this.data = this.getData();
+        this.log(`device data     ${util.inspect(this.data)} `)
 
 
         this.settings = this.getSettings();
 
         this.log(`this settings ${util.inspect(this.settings)}`)
 
-        
+
 
         this.onCapabilityOnoff = (value, opts, callback) => {
-            
+
             // ... set value to real device
             this.log(`value send onff   ${value} `)
 
-           
 
-            
+
+
             //  signal.emit('sendCommand', sendCommand)
             this.log(` sendcommand onoff value`)
 
             let plugwiseid = this.data.plugwiseid
-            this.sendCommandToPlugwise('switch',plugwiseid,value)
+            this.sendCommandToPlugwise('switch', plugwiseid, value)
 
             // Then, emit a callback ( err, result )
             callback(null);
@@ -68,7 +78,7 @@ class circleDevice extends Homey.Device {
 
 
 
-     
+
 
         if (changedKeysArr.includes(`locked`)) {
 
@@ -79,10 +89,10 @@ class circleDevice extends Homey.Device {
 
             this.sendCommandToPlugwise('lock', plugwiseid, newSettingsObj.locked)
 
-           
+
 
         }
-         
+
         // run when the user has changed the device's settings in Homey.
         // changedKeysArr contains an array of keys that have been changed
 
@@ -100,15 +110,31 @@ class circleDevice extends Homey.Device {
 
 
 
-        if (this.driver == 'circle') {
+        if (this.driver === 'circle') {
 
-            this.log(`this is device with driver id  ${this.getDriver().id}`)
-            this.log('info from circle device HD  ', HD)
+            this.log(`this is device with driver id  ${this.getDriver().id}`);
+            this.log('info from circle device HD  ', HD);
+
+          //  this.log(`capabilitiesObj  ${util.inspect(this.capabilitiesObj.onoff)}`);
+
+
+
+            if (HD.realstate === 'unknown') { this.setUnavailable("unavailble message jilles"); }
+            else { this.setAvailable(); }
+
+
+
 
 
             this.setCapabilityValue(`onoff`, HD.onoff)
-            this.setCapabilityValue(`measure_power`, HD.measure_power)
-            this.setCapabilityValue(`meter_power`, HD.meter_power)
+                .then(result => {
+                    this.log(`result setCqpabiltyValue onoff)     ${result} `);
+                })
+                .catch(err => {
+                    this.log(`errorsetCapabiltyValue onoff ${ err}`);
+                });
+            this.setCapabilityValue(`measure_power`, HD.measure_power);
+            this.setCapabilityValue(`meter_power`, HD.meter_power);
         }
     }
 
@@ -116,30 +142,30 @@ class circleDevice extends Homey.Device {
     sendCommandToPlugwise(modus, id, onoff) {
 
 
-        this.log('479 sendcmmand with plugwiseid  modus' + modus + '   id   '  + id + '   and    command   ' + onoff);
-        
-                       
-
-            let command = '';
-            if (onoff == true) {
-                command = 'on';
-            }
-            else if (onoff == false) {
-                command = "off";
-            }
-
-               
-
-        this.log('479 sendcmmand  modus '+ modus + 'with plugwiseid   ' + id + ' and    command   ' + onoff);
+        this.log('479 sendcmmand with plugwiseid  modus' + modus + '   id   ' + id + '   and    command   ' + onoff);
 
 
 
-        this.log('commandpath = /api/actions.html?option='+ modus + command + '&id=' + id)
+        let command = '';
+        if (onoff === true) {
+            command = 'on';
+        }
+        else if (onoff === false) {
+            command = "off";
+        }
 
 
-       // https://knowledge.zomers.eu/plugwise/Pages/Extract-actual-information-from-Plugwise.aspx
 
-        let path = '/api/actions.html?option='+ modus + command + '&id=' + id
+        this.log('479 sendcmmand  modus ' + modus + 'with plugwiseid   ' + id + ' and    command   ' + onoff);
+
+
+
+        this.log('commandpath = /api/actions.html?option=' + modus + command + '&id=' + id)
+
+
+        // https://knowledge.zomers.eu/plugwise/Pages/Extract-actual-information-from-Plugwise.aspx
+
+        let path = '/api/actions.html?option=' + modus + command + '&id=' + id
 
         //Homey.app.
         //self.reqserver = function (ip, port, path, method, username, password) { 

@@ -41,6 +41,8 @@ Changelog
 
 22-08-2018  v 2.0.4     new forum topic id
 
+03-02-2019  v 2.0.5     removed bugs that caused immedate crash in V2, the drivers  loaded  to slow in v2 so some objects werent ready in the app.js
+
 [![Paypal donate][pp-donate-image]][pp-donate-link]
 [pp-donate-link]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=42UGL52J4KPZE
 [pp-donate-image]: https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif

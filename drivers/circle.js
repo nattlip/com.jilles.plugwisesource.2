@@ -10,15 +10,19 @@ class circleDriver extends Homey.Driver {
 
     onInit() {
 
-        if (this.id == `circle`) {
+        this.log(`init driver id :   ${this.id}    `);
 
-            this.log(`init driver id :   ${this.id}    `)
+        this.homeyDevices = [];
 
-            this.homeyDevices = []
-            this.log(`${this.id} driver oninit this homeydevices   ${this.homeyDevices}  `)
+        if (this.id === `circle`) {
 
-            this.devices = this.getDevices()
-            this.log(`devices from getdevices  ${util.inspect(this.devices)} `)
+            this.log(`init driver id :   ${this.id}    `);
+
+            
+           
+
+            this.devices = this.getDevices();
+          //  this.log(`devices from getdevices  ${util.inspect(this.devices)} `);
         }
     }
 
@@ -33,7 +37,7 @@ class circleDriver extends Homey.Driver {
 
       
 
-        this.log(`pairing started  `)
+        this.log(`pairing started  `);
 
             callback(null, this.homeyDevices);
 
