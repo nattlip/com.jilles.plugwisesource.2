@@ -13,6 +13,8 @@ class lightDevice extends Homey.Device {
 
     onInit() {
 
+        this.log(`device getCapabilities ${util.inspect(this.getCapabilities(), true, 0)}`);
+        this.log(`device getCapabilities ${util.inspect(this.getCapabilityValue('onoff'), true, 0)}`);
 
         this.name =   this.getName()
         this.log(`device init ${this.name}`);
@@ -102,8 +104,8 @@ class lightDevice extends Homey.Device {
 
         if (this.driver == 'light') {
 
-            this.log(`this is device with driver id  ${this.getDriver().id}`)
-            this.log('info from light device HD  ', HD)
+         //   this.log(`this is device with driver id  ${this.getDriver().id}`)
+           // this.log('info from light device HD  ', HD)
 
 
             this.setCapabilityValue(`onoff`, HD.onoff)

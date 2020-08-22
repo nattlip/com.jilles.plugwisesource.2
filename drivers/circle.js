@@ -12,13 +12,15 @@ class circleDriver extends Homey.Driver {
 
         this.log(`init driver id :   ${this.id}    `);
 
-        this.homeyDevices = [];
+       
 
-        if (this.id === `circle`) {
+        if (this.id === "circle") {
+
+            this.homeyDevices = [];
 
             this.log(`init driver id :   ${this.id}    `);
 
-            
+          
            
 
             this.devices = this.getDevices();
@@ -60,4 +62,4 @@ class circleDriver extends Homey.Driver {
 
 
 
-module.exports = circleDriver
+module.exports = circleDriver;

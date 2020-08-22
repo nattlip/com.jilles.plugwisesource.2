@@ -21,7 +21,7 @@ class circleDevice extends Homey.Device {
 
 
        
-
+        this.log(`device getCapabilities ${util.inspect(this.getCapabilities(), true, 0)}`);
 
 
         this.name = this.getName()
@@ -113,7 +113,7 @@ class circleDevice extends Homey.Device {
         if (this.driver === 'circle') {
 
             this.log(`this is device with driver id  ${this.getDriver().id}`);
-            this.log('info from circle device HD  ', HD);
+          //  this.log('info from circle device HD  ', HD);
 
           //  this.log(`capabilitiesObj  ${util.inspect(this.capabilitiesObj.onoff)}`);
 

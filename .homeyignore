@@ -3,3 +3,4 @@
 .gitignore
 package-lock.json
 .git/
+start.js

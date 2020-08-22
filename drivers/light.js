@@ -10,15 +10,15 @@ class  lightDriver extends Homey.Driver {
 
     onInit() {
 
-        if (this.id === `light`) {
+        if (this.id === 'light') {
 
             this.log(`init driver id :   ${this.id}    `);
 
             this.homeyDevices = [];
-            this.log(`${this.id} driver oninit this homeydevices   ${this.homeyDevices}  `);
+        //    this.log(`${this.id} driver oninit this homeydevices   ${this.homeyDevices}  `);
 
             this.devices = this.getDevices();
-            this.log(`devices from getdevices  ${util.inspect(this.devices)} `);
+          //  this.log(`devices from getdevices  ${util.inspect(this.devices)} `);
         }
     }
 
@@ -31,10 +31,9 @@ class  lightDriver extends Homey.Driver {
 
     onPairListDevices(data, callback) {
 
-        this.homeyDevices.forEach(
-            (elem) => elem.virtualClass = 'light'
+       
 
-        );
+       
 
         this.log(`pairing started  `);
 
